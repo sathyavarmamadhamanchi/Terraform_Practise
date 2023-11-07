@@ -1,6 +1,6 @@
 #Terraform version
 terraform {
-  required_version = "~> 4.19.0"
+  required_version = "~> 1.6.3"
 }
 
 
