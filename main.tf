@@ -12,7 +12,7 @@ resource "aws_instance" "ubuntu" {
 }
 
 #S3_Bucket
-resource "aws_s3_bucket" "Bucket_a" {
+resource "aws_s3_bucket" "bucket_a" {
   bucket = var.bucket_name
   tags = {
     Name = "my bucket"
