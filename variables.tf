@@ -20,7 +20,7 @@ variable "name" {
 
 variable "bucket_name" {
   description = "Name-of-the-to-create"
-  default = "practise-bucket"
+  default = "sathya-bucket"
 }
 
 variable "environment" {
