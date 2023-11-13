@@ -10,3 +10,15 @@ resource "aws_instance" "ubuntu" {
     }
 
 }
+
+#S3_Bucket
+resource "aws_s3_bucket" "Bucket_0" {
+  bucket = var.bucket_name
+  acl = var.bucket_acl
+  tags = {
+    Name = "My bucket"
+    Enivironment = "${var.environment}"
+  }
+ 
+}
+
