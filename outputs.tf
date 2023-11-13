@@ -3,5 +3,5 @@ output "public_dns" {
 }
 
 output "S3_bucket_name" {
-  value = "${aws.s3.bucket.sathya-bucket.id}"
+  value = "${aws_s3_bucket.sathya-bucket.id}"
 }
