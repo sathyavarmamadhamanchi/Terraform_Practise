@@ -21,3 +21,38 @@ resource "aws_s3_bucket" "sathya-bucket" {
  
 }
 
+
+# Add bucket versioning for state rollback
+resource "aws_s3_bucket_versioning" "state_versioning" {
+  bucket = aws_s3_bucket.sathya-bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# Add bucket encryption to hide sensitive state data
+#resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption" {
+  #bucket = aws_s3_bucket.sathya-bucket.bucket
+  #rule {
+   # apply_server_side_encryption_by_default {
+   #   sse_algorithm     = "AES256"
+   # }
+  #}
+#}
+
+resource "aws_kms_key" "mykey" {
+  description             = "This key is used to encrypt bucket objects"
+  deletion_window_in_days = 10
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption" {
+  bucket = aws_s3_bucket.sathya-bucket.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      kms_master_key_id = aws_kms_key.mykey.arn
+      sse_algorithm     = "aws:kms"
+    }
+  }
+}
+
