@@ -12,10 +12,10 @@ resource "aws_instance" "ubuntu" {
 }
 
 #S3_buckets
-resource "aws_s3_bucket" "bucket_a" {
+resource "aws_s3_bucket" "sathya-bucket" {
   bucket = var.bucket_name
   tags = {
-    Name = "my_bucket"
+    Name = "my-bucket"
     Enivironment = var.environment
   }
  
