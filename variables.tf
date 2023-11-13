@@ -19,16 +19,16 @@ variable "name" {
 }
 
 variable "bucket_name" {
-  description = "Name of the to create"
+  description = "Name-of-the-to-create"
   default = "practise_bucket"
 }
 
 variable "environment" {
-   description = "Name of the environment"
+   description = "Name-of-the-environment"
   default = "Dev"
 }
 
 variable "bucket_acl" {
-  description = "ACL"
+  description = "acl"
   default = "private"
 }
