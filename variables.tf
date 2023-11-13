@@ -17,3 +17,18 @@ variable "name" {
   description = "name to pass to Name tag"
   default = "provisioned by terraform"
 }
+
+variable "bucket_name" {
+  description = "Name of the to create"
+  default = "Practise_bucket"
+}
+
+variable "environment" {
+   description = "Name of the environment"
+  default = "Dev"
+}
+
+variable "bucket_acl" {
+  description = "ACL"
+  default = "private"
+}
