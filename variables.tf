@@ -20,7 +20,7 @@ variable "name" {
 
 variable "bucket_name" {
   description = "Name-of-the-to-create"
-  default = "sathya-bucket-10964"
+  default = "sathya-bucket"
 }
 
 variable "environment" {
@@ -28,7 +28,3 @@ variable "environment" {
   default = "Dev"
 }
 
-variable "bucket_acl" {
-  description = "acl"
-  default = "private"
-}
