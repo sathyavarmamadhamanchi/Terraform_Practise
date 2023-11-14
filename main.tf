@@ -56,7 +56,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption"
   }
 }
 
-data "aws_iam_policy_document" "mypolicydocument" {
+data "aws_iam_policy_document" "my-policy-document" {
   statement {
     sid = "allows3"
     effect = "Allow"
@@ -68,8 +68,51 @@ data "aws_iam_policy_document" "mypolicydocument" {
   }
 }
 
-resource "aws_iam_policy" "mypolicy" {
-  name = "mypolicy"
+resource "aws_iam_policy" "my-policy" {
+  name = "my-policy"
   path = "/"
-  policy = "${data.aws_iam_policy_document.mypolicydocument.json}"
+  policy = "${data.aws_iam_policy_document.my-policy-document.json}"
+}
+
+
+
+
+resource "aws_iam_role" "my_role" {
+
+  name = "my_role"
+
+  assume_role_policy = jsonencode({
+    versioning = "2023-11-14"
+    statement = [
+      {
+      actions = "sts:AssumeRole"
+      effect = "Allow"
+      sid = "myrole"
+      Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+
+  tags = {
+    tag-key = "tag-value"
+  }
+  
+}
+
+data "aws_iam_policy_document" "instance_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole",]
+    principals {
+      type = "service"
+      identifiers = ["ec2.amazonaws.com",]
+    }
+  }
+}
+
+resource "aws_iam_role" "instance" {
+  name = "instance_role"
+  path = "/"
+  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json
 }
