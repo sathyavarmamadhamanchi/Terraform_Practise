@@ -102,6 +102,29 @@ resource "aws_iam_role_policy_attachment" "ec2-read-only-policy-attachment" {
 }
 
 
+resource "aws_iam_user" "my_user" {
+  name = "my_user"
+  path = "/"
+}
+
+resource "aws_iam_access_key" "my_key" {
+  user = aws_iam_user.my_user.name
+}
+
+data "aws_iam_policy_document" "my_user_policy_document" {
+  statement {
+    effect = "Allow"
+    actions   = ["ec2:Describe*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_user_policy" "my_user_policy" {
+  name = "my_user_policy"
+  user = aws_iam_user.my_user.name
+  policy = aws_iam_policy_document.my_user_policy_document.json
+}
+
   
 
 
