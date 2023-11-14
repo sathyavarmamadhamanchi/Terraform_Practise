@@ -58,7 +58,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption"
 
 data "aws_iam_policy_document" "mypolicydocument" {
   statement {
-    sid = "allow_s3"
+    sid = "allows3"
     effect = "Allow"
     actions = [  
       "s3:GetObject",
