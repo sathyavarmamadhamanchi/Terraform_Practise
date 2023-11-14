@@ -122,7 +122,7 @@ data "aws_iam_policy_document" "my_user_policy_document" {
 resource "aws_iam_user_policy" "my_user_policy" {
   name = "my_user_policy"
   user = aws_iam_user.my_user.name
-  policy = aws_iam_policy_document.my_user_policy_document.json
+  policy = data.aws_iam_policy_document.my_user_policy_document.json
 }
 
   
