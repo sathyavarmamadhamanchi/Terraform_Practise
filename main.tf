@@ -75,44 +75,33 @@ resource "aws_iam_policy" "my-policy" {
 }
 
 
-
-
-resource "aws_iam_role" "my_role" {
-
-  name = "my_role"
-
-  assume_role_policy = jsonencode({
-    versioning = "2023-11-14"
-    statement = [
-      {
-      actions = "sts:AssumeRole"
-      effect = "Allow"
-      sid = "myrole"
-      Principal = {
-          Service = "ec2.amazonaws.com"
-        }
+resource "aws_iam_role" "ec2_iam_role" {
+  name = "ec2_iam_role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2023-11-14",
+  "Statement": [
+    {
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+          "ec2.amazonaws.com"
+        ]
       },
-    ]
-  })
-
-  tags = {
-    tag-key = "tag-value"
-  }
-  
-}
-
-data "aws_iam_policy_document" "instance_assume_role_policy" {
-  statement {
-    actions = ["sts:AssumeRole",]
-    principals {
-      type = "service"
-      identifiers = ["ec2.amazonaws.com",]
+      "Action": "sts:AssumeRole"
     }
-  }
+  ]
+}
+EOF
 }
 
-resource "aws_iam_role" "instance" {
-  name = "instance_role"
-  path = "/"
-  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json
+resource "aws_iam_role_policy_attachment" "ec2-read-only-policy-attachment" {
+    role = "${aws_iam_role.ec2_iam_role.name}"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
 }
+
+
+  
+
+
