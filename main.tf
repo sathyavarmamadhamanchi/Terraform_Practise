@@ -56,3 +56,23 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption"
   }
 }
 
+#Creating policy
+resource "aws_iam_policy" "my-policy" {
+  name = "my-policy"
+  description = "my test policy"
+  policy = jsonencode({
+    Version = "2023-11-14"
+    Statement = [
+      {
+        Action = ["ec2:*"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+      {
+        Action = ["s3:*"]
+        Effect = "Allow"
+        Resource = "${aws_s3_bucket.sathya-bucket.arn}"
+      }
+    ]
+  })
+}
