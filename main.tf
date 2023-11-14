@@ -79,7 +79,7 @@ resource "aws_iam_role" "ec2_iam_role" {
   name = "ec2_iam_role"
   assume_role_policy = <<EOF
 {
-  "Version": "2023-11-14",
+  "Version": "2012-10-17",
   "Statement": [
     {
       "Sid": "",
