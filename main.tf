@@ -56,7 +56,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state_encryption"
   }
 }
 
-data "aws_iam_policy_document" "my-policy-document" {
+data "aws_iam_policy_document" "mypolicydocument" {
   statement {
     sid = "allow_s3"
     effect = "Allow"
@@ -68,8 +68,8 @@ data "aws_iam_policy_document" "my-policy-document" {
   }
 }
 
-resource "aws_iam_policy" "my-policy" {
-  name = "my-policy"
+resource "aws_iam_policy" "mypolicy" {
+  name = "mypolicy"
   path = "/"
-  policy = "${data.aws_iam_policy_document.my-policy-document.json}"
+  policy = "${data.aws_iam_policy_document.mypolicydocument.json}"
 }
