@@ -1,7 +1,7 @@
 module "ecr" {
   source = "terraform-aws-modules/ecr/aws"
 
-  repository_name = "Practise-repo"
+  repository_name = "practise-repo"
   repository_lambda_read_access_arns = ["arn:aws:iam::615238735504:user/my_user"]
   repository_lifecycle_policy = jsonencode({
    rules = [
