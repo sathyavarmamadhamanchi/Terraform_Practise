@@ -8,7 +8,7 @@ module "dynamodb_table" {
     {
         name = "id"
         type = "N"
-    }
+    },
     {
         name = "Sname"
         type = "S"
