@@ -3,6 +3,7 @@ module "dynamodb_table" {
 
   name = "my-table"
   hash_key = "id"
+  range_key = "Sname"
 
   attributes = [
     {
