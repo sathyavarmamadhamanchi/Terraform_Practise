@@ -3,7 +3,7 @@ module "ecr" {
 
   repository_name = "Practise-repo"
   repository_lambda_read_access_arns = ["arn:aws:iam::615238735504:user/my_user"]
-  repository_lifecycle_policy = jsondecode({
+  repository_lifecycle_policy = jsonencode({
    rules = [
       {
         rulePriority = 1,
